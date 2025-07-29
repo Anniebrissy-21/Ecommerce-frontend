@@ -11,10 +11,22 @@ const ProductPage = () => {
     const [product, setProduct] = useState({})
     const [similarProducts, setSimilarProducts] = useState([])
     const [loading, setloading] = useState(false)
+    const [inCart, setInCart]  = useState(false)
 
-    // function add_item() {
-    //     api.post("add_item")
-    // }
+    const cart_code = localStorage.getItem('cart_code')
+
+    const newItem = {cart_code: cart_code, product_id: product.id}
+
+    function add_item() {
+        api.post("add_item/", newItem)
+        .then(res => {
+            console.log(res.data)
+            setInCart(true)
+        })
+        .catch(err => {
+            console.log(err.message)
+        })
+    }
 
     useEffect(function () {
         setloading(true)
@@ -60,9 +72,10 @@ const ProductPage = () => {
                                 {/* <input type="num" className='form-control text-center me-3'
                                     id='inputQuantity' value='1' style={{ maxWidth: '3rem' }} /> */}
 
-                                <button className='btn btn-outline-dark flex-shrink-0' type='button'>
+                                <button className='btn btn-outline-dark flex-shrink-0' type='button' onClick={add_item}
+                                     disabled={inCart}>
                                     <i className='bi-cart-fill me-1'></i>
-                                    Add to cart
+                                    {inCart ? "Product Added to Cart" : "Add to cart"}
                                 </button>
                             </div>
                         </div>
