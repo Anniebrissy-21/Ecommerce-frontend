@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const CartSummary = ({ cartTotal, tax }) => {
     const subTotal = Number(cartTotal || 0);
@@ -29,12 +30,14 @@ const CartSummary = ({ cartTotal, tax }) => {
               <span>Total:</span>
               <span>{`$${formatPrice(total)}`}</span>
             </div>
+            <Link to="/checkout">
             <button
               className="btn btn-primary w-100"
               style={{ backgroundColor: '#6050DC', borderColor: '#6050DC' }}
             >
               Proceed To Checkout
             </button>
+            </Link>
           </div>
         </div>
       </div>
