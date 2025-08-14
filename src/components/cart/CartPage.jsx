@@ -2,26 +2,16 @@ import React, { useEffect, useState } from 'react'
 import CartItem from './CartItem'
 import CartSummary from './CartSummary'
 import api from '../../api'
+import Spinner from '../ui/Spinner'
+import useCartData from '../../hooks/useCartData'
 
 const CartPage = ({setNumCartItems}) => {
-  const cart_code = localStorage.getItem('cart_code')
-  const [cartItems, setCartItems] = useState([])
-  const [cartTotal, setCartTotal] = useState(0.00)
-  const tax = 4.00
+  
+  const { cartItems, setCartItems, cartTotal, setCartTotal, tax, loading } = useCartData()
 
-  useEffect(() => {
-    if (cart_code) {
-      api.get(`get_cart?cart_code=${cart_code}`)
-        .then(res => {
-          console.log(res.data)
-          setCartItems(res.data.items)
-          setCartTotal(res.data.sum_total)
-        })
-        .catch(err => {
-          console.log(err.message)
-        })
-    }
-  }, [cart_code])
+  if (loading) {
+    return <Spinner loading={loading} />
+  }
 
   if (cartItems.length < 1) {
     return (
@@ -37,6 +27,7 @@ const CartPage = ({setNumCartItems}) => {
       <div className="row">
         <div className="col-md-8">
           {cartItems.map(item => <CartItem key={item.id} item={item} cartItems={cartItems} setCartTotal={setCartTotal} 
+          setCartItems={setCartItems}
           setNumCartItems={setNumCartItems}/>)}
         </div>
         <CartSummary cartTotal={cartTotal} tax={tax} />
