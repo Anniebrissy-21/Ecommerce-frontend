@@ -8,6 +8,7 @@ const UserProfilePage = () => {
 
     const [userInfo, setUserInfo] = useState({})
     const [loading, setLoading] = useState(false)
+    const [orderItems, setOrderItems] = useState([])
 
     useEffect(function () {
         setLoading(true)
@@ -15,6 +16,7 @@ const UserProfilePage = () => {
             .then(res => {
                 console.log(res.data)
                 setUserInfo(res.data)
+                setOrderItems(res.data.items)
                 setLoading(false)
             })
             .catch(err => {
@@ -33,7 +35,7 @@ const UserProfilePage = () => {
             <UserInfo userInfo={userInfo} />
 
 
-            <OrderHistoryItemContainer />
+            <OrderHistoryItemContainer orderItems={orderItems} />
 
         </div>
     )

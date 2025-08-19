@@ -11,6 +11,7 @@ import LoginPage from "./components/user/LoginPage"
 import ProtectedRoute from "./components/ui/ProtectedRoute"
 import { AuthProvider } from "./context/AuthContext"
 import UserProfilePage from "./components/user/UserProfilePage"
+import PaymentsStatusPage from "./components/payments/PaymentsStatusPage"
 
 const App = () => {
   const [numCartItems, setNumCartItems] = useState(0)
@@ -42,6 +43,7 @@ const App = () => {
             <Route path="login" element={<LoginPage />} />
             <Route path="profile" element={<UserProfilePage />} />
             <Route path="*" element={<NotFountPage />} />
+            <Route path="payment-status" element={<PaymentsStatusPage setNumCartItems={setNumCartItems} />} />
           </Route>
         </Routes>
       </BrowserRouter>
