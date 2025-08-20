@@ -3,15 +3,33 @@ import { Link, useLocation } from 'react-router-dom'
 import api from '../../api'
 
 const PaymentsStatusPage = (setNumCartItems) => {
-    
+
 
     const [statusMessage, setStatusMessage] = useState('Verifying your payment.')
     const [statusSubMessage, setStatusSubMessage] = useState('Wait a moment, your payment is being verified!')
     const location = useLocation()
 
-    useEffect(function(){
+    useEffect(function () {
+        const queryParams = new URLSearchParams(location.search)
+        const paymentID = queryParams.get('paymentId')
+        const payerId = queryParams.get('PayerID')
+        const ref = queryParams.get('ref')
+        if (paymentID && payerId && ref) {
+            api.post(`paypal_payment_callback/?paymentId=${paymentID}&payerId=${payerId}&ref=${ref}`)
+                .then(res => {
+                    setStatusMessage(res.data.message)
+                    setStatusSubMessage(res.data.subMessage)
+                    localStorage.removeItem("cart_code")
+                    setNumCartItems(0)
+                })
+                .catch(err => {
+                    console.log(err.message)
+                })
+        }
 
+    }, [])
 
+    useEffect(function () {
 
         const queryParams = new URLSearchParams(location.search)
         const status = queryParams.get('status')
@@ -21,15 +39,15 @@ const PaymentsStatusPage = (setNumCartItems) => {
 
         if (status && txRef && transactionId) {
             api.post(`payment_callback/?status=${status}&tx_ref=${txRef}&transaction_id=${transactionId}`)
-            .then(res => {
-                setStatusMessage(res.data.message)
-                setStatusSubMessage(res.data.subMessage)
-                localStorage.removeItem("cart_code")
-                setNumCartItems(0)
-            })
-            .catch(err => {
-                console.log(err.message)
-            })
+                .then(res => {
+                    setStatusMessage(res.data.message)
+                    setStatusSubMessage(res.data.subMessage)
+                    localStorage.removeItem("cart_code")
+                    setNumCartItems(0)
+                })
+                .catch(err => {
+                    console.log(err.message)
+                })
         }
 
 
