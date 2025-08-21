@@ -22,7 +22,7 @@ const LoginPage = () => {
   function handleSubmit(e) {
     e.preventDefault()
 
-    api.post("api/token/", userInfo)
+    api.post("/api/token/", userInfo)
       .then(res => {
         console.log(res.data)
         localStorage.setItem("access", res.data.access)

@@ -19,7 +19,7 @@ const ProductPage = ({setNumCartItems}) => {
     const newItem = { cart_code: cart_code, product_id: product.id }
 
     function add_item() {
-        api.post("add_item/", newItem)
+        api.post("/add_item/", newItem)
             .then(res => {
                 console.log(res.data)
                 toast.success("Item added to cart")
@@ -33,7 +33,7 @@ const ProductPage = ({setNumCartItems}) => {
 
     useEffect(function () {
         if (product.id && cart_code) {
-            api.get(`products_in_cart?cart_code=${cart_code}&product_id=${product.id}`)
+            api.get(`/products_in_cart?cart_code=${cart_code}&product_id=${product.id}`)
                 .then(res => {
                     console.log(res.data)
                     setInCart(res.data.product_in_cart)
@@ -46,7 +46,7 @@ const ProductPage = ({setNumCartItems}) => {
 
     useEffect(function () {
         setloading(true)
-        api.get(`product_detail/${slug}`).then(res => {
+        api.get(`/product_detail/${slug}`).then(res => {
             console.log(res.data)
             setProduct(res.data)
             setSimilarProducts(res.data.similar_products)
@@ -68,7 +68,7 @@ const ProductPage = ({setNumCartItems}) => {
                 <div className='container px-4 px-lg-5 my-5'>
                     <div className='row gx-4 gx-lg-5 align-items-center'>
                         <div className="col-md-6">
-                            <img className='card-img-top mb-5 mb-md-0' src={`${BASE_URL}${product.image}`} alt="..." />
+                            <img className='card-img-top mb-5 mb-md-0' src={`${BASE_URL}/${product.image}`} alt="..." />
                         </div>
                         <div className='col-md-6'>
                             <div className="small mb-1"> SKU: BST-496</div>
@@ -78,11 +78,7 @@ const ProductPage = ({setNumCartItems}) => {
                                 <span>{`$${product.price}`}</span>
                             </div>
                             <p className='lead'>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quis esse velit,
-                                labore consequuntur nam ipsum animi, assumenda quo eum saepe veritatis doloribus maiores, vitae quam.
-                                Veritatis consequuntur quibusdam officiis. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi eveniet,
-                                fugit neque quaerat aut sequi harum voluptates doloribus explicabo pariatur aspernatur necessitatibus.
-                                Fugit sed sequi, animi aperiam odio vero eos.
+                                {product.description}
                             </p>
                             <div className="d-flex">
                                 {/* <input type="num" className='form-control text-center me-3'

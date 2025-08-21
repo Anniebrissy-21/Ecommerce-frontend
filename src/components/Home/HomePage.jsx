@@ -6,7 +6,6 @@ import PlaceholderContainer from '../ui/PlaceholderContainer'
 import Error from '../ui/Error'
 import { randomValue } from '../../GenerateCartCode'
 
-
 const HomePage = () => {
 
   const [products, setProducts] = useState([])
@@ -21,13 +20,15 @@ const HomePage = () => {
 
   useEffect(function () {
     setLoading(true)
-    api.get("products").then(res => {
+    api.get("/products").then(res => {
       console.log(res.data)
       setProducts(res.data)
       setLoading(false)
+      setProducts([])
       setError('')
     })
       .catch(err => {
+        debugger
         console.log(err.message)
         setLoading(false)
         setError(err.message)

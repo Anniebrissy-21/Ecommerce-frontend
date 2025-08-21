@@ -12,7 +12,7 @@ const UserProfilePage = () => {
 
     useEffect(function () {
         setLoading(true)
-        api.get("user_info")
+        api.get("/user_info")
             .then(res => {
                 console.log(res.data)
                 setUserInfo(res.data)
@@ -20,7 +20,7 @@ const UserProfilePage = () => {
                 setLoading(false)
             })
             .catch(err => {
-                console.log(err.msessage)
+                console.log(err.message)
                 setLoading(false)
             })
     }, [])

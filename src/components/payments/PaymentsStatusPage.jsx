@@ -12,11 +12,10 @@ const PaymentsStatusPage = ({ setNumCartItems }) => {
     useEffect(function () {
         const queryParams = new URLSearchParams(location.search)
         const paymentID = queryParams.get('paymentId')
-        const payerId = queryParams.get('PayerID') // PayPal uses PayerID (capital D)
+        const payerId = queryParams.get('PayerID') 
         const ref = queryParams.get('ref')
         if (paymentID && payerId && ref) {
-            // BE SURE TO USE LOWERCASE 'payerId' in the request, since your Django backend expects 'payerId'
-            api.post(`paypal_payment_callback/?paymentId=${paymentID}&payerId=${payerId}&ref=${ref}`)
+            api.post(`/paypal_payment_callback/?paymentId=${paymentID}&payerId=${payerId}&ref=${ref}`)
                 .then(res => {
                     setStatusMessage(res.data.message)
                     setStatusSubMessage(res.data.subMessage)
@@ -42,7 +41,7 @@ const PaymentsStatusPage = ({ setNumCartItems }) => {
 
 
         if (status && txRef && transactionId) {
-            api.post(`payment_callback/?status=${status}&tx_ref=${txRef}&transaction_id=${transactionId}`)
+            api.post(`/payment_callback/?status=${status}&tx_ref=${txRef}&transaction_id=${transactionId}`)
                 .then(res => {
                     setStatusMessage(res.data.message)
                     setStatusSubMessage(res.data.subMessage)

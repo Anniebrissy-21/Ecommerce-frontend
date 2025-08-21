@@ -1,13 +1,17 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
-// export const BASE_URL = "http://127.0.0.1:8000"
+export const BASE_URL = "https://shopitapp2.onrender.com"
 
-export const BASE_URL = import.meta.env.VITE_BASE_URL || "http://127.0.0.1:8000"
+// export const BASE_URL = JSON.stringify(import.meta.env.VITE_BASE_URL) || "http://127.0.0.1:8000"
 
 const api = axios.create({
     baseURL: BASE_URL
 })
+
+// console.log("VITE_BASE_URL=", JSON.stringify(import.meta.env.VITE_BASE_URL));
+// console.log("BASE_URL=", JSON.stringify(BASE_URL));
+
 
 api.interceptors.request.use(
     (config) => {

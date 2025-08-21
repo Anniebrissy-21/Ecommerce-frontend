@@ -20,7 +20,7 @@ const App = () => {
 
   useEffect(() => {
     if (cart_code) {
-      api.get(`cart_status?cart_code=${cart_code}`)
+      api.get(`/cart_status?cart_code=${cart_code}/`)
         .then(res => {
           console.log(res.data)
           setNumCartItems(res.data.num_of_items)

@@ -11,7 +11,7 @@ const PaymentSection = () => {
 
     function makePayment() {
         setLoading(true)
-        api.post("initiate_payment/", { cart_code })
+        api.post("/initiate_payment/", { cart_code })
             .then(res => {
                 console.log(res.data)
                 setLoading(false)
@@ -25,7 +25,7 @@ const PaymentSection = () => {
 
     function makePayPalPayment() {
         setLoading(true)
-        api.post("initiate_paypal_payment/", { cart_code })
+        api.post("/initiate_paypal_payment/", { cart_code })
             .then(res => {
                 console.log(res.data)
                 setLoading(false)

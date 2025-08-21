@@ -4,10 +4,10 @@ import api from "../api";
 
 export const AuthContext = createContext(false)
 
-export function AuthProvider({children}) {
+export function AuthProvider({ children }) {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false)
-    const[username, setUsername] = useState("")
+    const [username, setUsername] = useState("")
 
     const handleAuth = () => {
         const token = localStorage.getItem("access")
@@ -22,21 +22,22 @@ export function AuthProvider({children}) {
     }
 
     function get_username() {
-        api.get("get_username")
-        .then(res => {
-            setUsername(res.data.username)
-        })
-        .catch(err => {
-            console.log(err.message)
-        })
+        api.get("/get_username/")
+            .then(res => {
+                setUsername(res.data.username)
+            })
+            .catch(err => {
+                console.log(err.message)
+            })
     }
 
-    useEffect(function() {
+
+    useEffect(function () {
         handleAuth()
         get_username()
     }, [])
 
-    const authValue = {isAuthenticated, username, setIsAuthenticated, get_username}
+    const authValue = { isAuthenticated, username, setIsAuthenticated, get_username }
 
     return <AuthContext.Provider value={authValue} >
         {children}
