@@ -12,7 +12,7 @@ const PaymentsStatusPage = (setNumCartItems) => {
     useEffect(function () {
         const queryParams = new URLSearchParams(location.search)
         const paymentID = queryParams.get('paymentId')
-        const payerId = queryParams.get('PayerID')
+        const payerId = queryParams.get('payerID')
         const ref = queryParams.get('ref')
         if (paymentID && payerId && ref) {
             api.post(`paypal_payment_callback/?paymentId=${paymentID}&payerId=${payerId}&ref=${ref}`)
