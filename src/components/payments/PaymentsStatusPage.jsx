@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import api from '../../api'
 
-const PaymentsStatusPage = (setNumCartItems) => {
+const PaymentsStatusPage = ({setNumCartItems}) => {
 
 
     const [statusMessage, setStatusMessage] = useState('Verifying your payment.')
