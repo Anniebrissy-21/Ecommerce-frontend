@@ -24,7 +24,6 @@ const HomePage = () => {
       console.log(res.data)
       setProducts(res.data)
       setLoading(false)
-      setProducts([])
       setError('')
     })
       .catch(err => {
@@ -32,6 +31,7 @@ const HomePage = () => {
         console.log(err.message)
         setLoading(false)
         setError(err.message)
+        setProducts([])
       })
   }, [])
 
