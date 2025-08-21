@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import api from '../../api'
 
-const PaymentsStatusPage = ({setNumCartItems}) => {
+const PaymentsStatusPage = ({ setNumCartItems }) => {
 
 
     const [statusMessage, setStatusMessage] = useState('Verifying your payment.')
@@ -12,10 +12,11 @@ const PaymentsStatusPage = ({setNumCartItems}) => {
     useEffect(function () {
         const queryParams = new URLSearchParams(location.search)
         const paymentID = queryParams.get('paymentId')
-        const payerId = queryParams.get('PayerID')
+        const payerId = queryParams.get('PayerID') // PayPal uses PayerID (capital D)
         const ref = queryParams.get('ref')
         if (paymentID && payerId && ref) {
-            api.post(`paypal_payment_callback/?paymentId=${paymentID}&payerID=${payerId}&ref=${ref}`)
+            // BE SURE TO USE LOWERCASE 'payerId' in the request, since your Django backend expects 'payerId'
+            api.post(`paypal_payment_callback/?paymentId=${paymentID}&payerId=${payerId}&ref=${ref}`)
                 .then(res => {
                     setStatusMessage(res.data.message)
                     setStatusSubMessage(res.data.subMessage)
@@ -23,9 +24,12 @@ const PaymentsStatusPage = ({setNumCartItems}) => {
                     setNumCartItems(0)
                 })
                 .catch(err => {
+                    setStatusMessage("Payment failed.")
+                    setStatusSubMessage("Please try again or contact support.")
                     console.log(err.message)
                 })
         }
+
 
     }, [])
 
