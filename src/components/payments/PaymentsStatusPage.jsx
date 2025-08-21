@@ -15,7 +15,7 @@ const PaymentsStatusPage = ({setNumCartItems}) => {
         const payerId = queryParams.get('payerID')
         const ref = queryParams.get('ref')
         if (paymentID && payerId && ref) {
-            api.post(`paypal_payment_callback/?paymentId=${paymentID}&payerId=${payerId}&ref=${ref}`)
+            api.post(`paypal_payment_callback/?paymentId=${paymentID}&PayerID=${payerId}&ref=${ref}`)
                 .then(res => {
                     setStatusMessage(res.data.message)
                     setStatusSubMessage(res.data.subMessage)
