@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 
 
 const HomeCard = ({product}) => {
+    console.log(BASE_URL)
     return (
         <div className={`col-md-3 ${styles.col}`}>
             <Link to={`/products/${product.slug}`} className={styles.link}>
                 <div className={styles.card}>
 
                     <div className={styles.cardImgWrapper}>
-                        <img src={`${BASE_URL}${product.image}`} className={styles.cardImgTop} alt="Product Image" />
-
+                        <img src={`${product.image}`} className={styles.cardImgTop} alt="Product Image" />
+                        
                     </div>
                     <div className={styles.cardBody}>
                         <h5 className={`${styles.cardTitle} mb-1`}>{product.name}</h5>

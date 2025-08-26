@@ -6,7 +6,7 @@ const OrderItem = ({ cartitem }) => {
         <div>
             <div className="d-flex justify-content-between align-items-center mb-3" style={{ padding: '10px' }}>
                 <div className="d-flex align-item-center">
-                    <img src={`${BASE_URL}${cartitem.product.image}`} alt="Product" className='img-fluid'
+                    <img src={`${cartitem.product.image}`} alt="Product" className='img-fluid'
                         style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '5px' }} />
                     <div className="ms-3">
                         <h6 className='mb-0'>{ cartitem.product.name }</h6>

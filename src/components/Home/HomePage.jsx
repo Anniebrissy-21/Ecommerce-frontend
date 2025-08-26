@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import CardContainer from './CardContainer'
-import api from '../../api'
+import api, { BASE_URL } from '../../api'
 import PlaceholderContainer from '../ui/PlaceholderContainer'
 import Error from '../ui/Error'
 import { randomValue } from '../../GenerateCartCode'
@@ -27,7 +27,6 @@ const HomePage = () => {
       setError('')
     })
       .catch(err => {
-        debugger
         console.log(err.message)
         setLoading(false)
         setError(err.message)

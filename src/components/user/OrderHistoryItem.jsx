@@ -9,7 +9,7 @@ const OrderHistoryItem = ({item}) => {
             <div className={`order-item mb-3 ${styles.orderItem}`}>
                 <div className="row">
                     <div className="col-md-2">
-                        <img src={`${BASE_URL}${item.product.image}`} alt="Order Item" className='img-fluid'
+                        <img src={`${item.product.image}`} alt="Order Item" className='img-fluid'
                             style={{ borderRadius: '5px' }} />
                     </div>
                     <div className="col-md-6">

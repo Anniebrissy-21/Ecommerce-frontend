@@ -48,7 +48,7 @@ const CartItem = ({ item, setCartTotal, cartItems, setNumCartItems, setCartItems
   return (
     <div className='col-md-12'>
       <div className='cart-item d-flex align-items-center mb-3 p-3' style={{ backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
-        <img src={`${BASE_URL}${item.product.image}`} alt="Product image"
+        <img src={`${item.product.image}`} alt="Product image"
           className='img-fluid'
           style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '5px' }} />
 
