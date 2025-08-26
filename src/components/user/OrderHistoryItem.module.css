@@ -1,5 +1,13 @@
 .orderItem {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(191, 160, 107, 0.07), 0 1.5px 4px rgba(130, 110, 80, 0.04);
+  background: #fff;
+  transition: box-shadow 0.18s, transform 0.18s;
+  border: 1px solid #f6e5c7;
+  padding: 20px 14px;
+  margin-bottom: 16px;
+}
+.orderItem:hover {
+  box-shadow: 0 4px 28px rgba(191, 160, 107, 0.14), 0 3px 14px rgba(130, 110, 80, 0.07);
+  transform: translateY(-2px) scale(1.012);
 }

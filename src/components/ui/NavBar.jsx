@@ -1,18 +1,29 @@
+import React, { useContext } from "react";
 import { FaCartShopping } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import NavBarLink from "./NavBarLink";
+import { AuthContext } from "../../context/AuthContext";
 
-const NavBar = ({ numCartItems, username, onLogout }) => {
+const NavBar = ({ numCartItems }) => {
+  const { isAuthenticated, username, setIsAuthenticated } = useContext(AuthContext);
   const itemCount = Number(numCartItems) || 0;
+
+  function onLogout() {
+    localStorage.removeItem("access");
+    // Optionally remove other auth tokens/localstorage items here
+    setIsAuthenticated(false);
+  }
 
   return (
     <nav className={`navbar navbar-expand-lg navbar-light bg-light shadow-sm py-3 ${styles.stickyNavbar}`}>
       <div className="container">
-        <Link className="navbar-brand fw-bold" to="/" style={{ letterSpacing: '1px', fontSize: "1.55rem" }}>
+        {/* Brand */}
+        <Link className="navbar-brand fw-bold" to="/" style={{ letterSpacing: "1px", fontSize: "1.55rem" }}>
           ShopIt
         </Link>
 
+        {/* Burger toggle */}
         <button
           className="navbar-toggler"
           type="button"
@@ -25,15 +36,16 @@ const NavBar = ({ numCartItems, username, onLogout }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
+        {/* Navbar content */}
         <div className="collapse navbar-collapse" id="navbarContent">
-          {/* Navigation Links */}
+          {/* Main navigation links */}
           <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
             <NavBarLink />
           </ul>
 
-          {/* Auth and Cart */}
+          {/* Auth & Cart area */}
           <div className="d-flex align-items-center ms-auto gap-2">
-            {!username ? (
+            {!isAuthenticated ? (
               <>
                 <NavLink to="/login" className="btn btn-link text-decoration-none px-2">
                   Login
@@ -44,17 +56,23 @@ const NavBar = ({ numCartItems, username, onLogout }) => {
               </>
             ) : (
               <>
-                <span className="text-muted me-2 d-none d-lg-inline">Hi, {username}</span>
+                <NavLink to="/profile" className={({ isActive }) =>
+                  isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"}
+                  end
+                >
+                  Hi, {username}
+                </NavLink>
                 <button
+                  onClick={onLogout}
                   className="btn btn-light border px-3 me-2"
                   style={{ borderRadius: 20, fontWeight: 500 }}
-                  onClick={onLogout}
                 >
                   Logout
                 </button>
               </>
             )}
 
+            {/* Cart icon */}
             <Link
               to="/cart"
               className={`btn position-relative ${styles.responsiveCart}`}
@@ -69,7 +87,7 @@ const NavBar = ({ numCartItems, username, onLogout }) => {
                     fontSize: "0.82rem",
                     padding: "0.4em 0.7em",
                     backgroundColor: "#cab49c",
-                    color: "#fff"
+                    color: "#fff",
                   }}
                 >
                   {itemCount}
@@ -84,4 +102,3 @@ const NavBar = ({ numCartItems, username, onLogout }) => {
 };
 
 export default NavBar;
-
