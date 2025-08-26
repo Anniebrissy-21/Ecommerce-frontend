@@ -1,63 +1,31 @@
-import React, { useContext } from 'react'
-import { Link, NavLink } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const NavBarLink = () => {
-
-    const { isAuthenticated, setIsAuthenticated, username } = useContext(AuthContext)
-
-    function logout() {
-        localStorage.removeItem("access")
-        setIsAuthenticated(false)
-    }
-
     return (
-        <ul className='navbar-nav ms-auto mb-2 mg-lg-0'>
-            {isAuthenticated ?
-                <>
-                    <li className='nav-item'>
-                        <NavLink to="/profile" className={({ isActive }) =>
-                            isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"}
-                            end
-                        >
-                            Hi, {username}
-                        </NavLink>
-                    </li>
+        <>
+            <li className='nav-item'>
+                <NavLink
+                    to="/"
+                    className={({ isActive }) => isActive ? 'nav-link active fw-semibold' : 'nav-link fw-semibold'}
+                    end
+                >
+                    Home
+                </NavLink>
+            </li>
 
-                    <li className='nav-item' onClick={logout}>
-                        <NavLink to="/" className={({ isActive }) =>
-                            isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"}
-                            end
-                        >
-                            Logout
-                        </NavLink>
-                    </li>
-                </>
-                :
-                <>
-                    <li className='nav-item'>
-                        <NavLink to="/login" className={({ isActive }) =>
-                            isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"}
-                            end
-                        >
-                            Login
-                        </NavLink>
-                    </li>
+            <li className='nav-item'>
+                <NavLink
+                    to="/products"
+                    className={({ isActive }) => isActive ? 'nav-link active fw-semibold' : 'nav-link fw-semibold'}
+                >
+                    Products
+                </NavLink>
+            </li>
 
-                    <li className='nav-item'>
-                        <NavLink to="/register" className={({ isActive }) =>
-                            isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"}
-                            end
-                        >
-                            Register
-                        </NavLink>
-                    </li>
-                </>
+            {/* Add more navigation links here, without Login/Register */}
+        </>
+    );
+};
 
-            }
-
-        </ul>
-    )
-}
-
-export default NavBarLink
+export default NavBarLink;

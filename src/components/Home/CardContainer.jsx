@@ -1,22 +1,25 @@
-import React from 'react'
-import HomeCard from './HomeCard'
+import HomeCard from './HomeCard';
 
-const CardContainer = ({ products }) => {
-    return (
-        <section className='py-5' id='shop'>
-            <h4 style={{ textAlign: "center" }}>Our Products</h4>
-            <div className='container px-4 px-lg-5 mt-5'>
-                <div className='row justify-content-center'>
-                    {products.map(product => <HomeCard key={product.id} product={product} />)}
-
-                </div>
-
+const CardContainer = ({ products }) => (
+    <section style={{ padding: "24px 0", background: "#f5efe7", minHeight: "60vh" }} id="shop">
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <h2 style={{
+                fontWeight: 600, fontSize: 28,
+                textAlign: "center", color: "#704f28", marginBottom: "2.4rem"
+            }}>
+                Our Products
+            </h2>
+            <div style={{
+                display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(236px, 1fr))",
+                gap: "1.8rem"
+            }}>
+                {products.map(product => (
+                    <HomeCard key={product.id} product={product} />
+                ))}
             </div>
+        </div>
+    </section>
+);
 
+export default CardContainer;
 
-
-        </section>
-    )
-}
-
-export default CardContainer

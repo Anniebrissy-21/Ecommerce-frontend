@@ -1,6 +1,6 @@
 @media (max-width: 1000px) {
     .responsiveCart {
-        margin-top: 20px;
+        margin-top: 14px;
     }
 }
 
@@ -8,4 +8,13 @@
     position: sticky !important;
     top: 0;
     z-index: 1030;
+    background: #fff;
+}
+
+.navbar-brand {
+    color: #71513a !important;
+}
+
+.badge {
+    box-shadow: 0 2px 8px #f6e6cc57;
 }

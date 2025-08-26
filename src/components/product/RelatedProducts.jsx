@@ -1,18 +1,28 @@
+import React from 'react';
+import HomeCard from '../Home/HomeCard';
 
-import React from 'react'
-import HomeCard from '../Home/HomeCard'
+const RelatedProducts = ({ products }) => {
+  return (
+    <section className='py-4' style={{ background: "#f8f4ef" }}>
+      <div className="container px-4 px-lg-5">
+        <h2 className='fw-bold mb-4' style={{ color: "#7d6145" }}>
+          Related Products
+        </h2>
+        {/* Responsive CSS grid with gap */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            gap: "2rem"
+          }}
+        >
+          {products.map(product => (
+            <HomeCard key={product.id} product={product} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
-const RelatedProducts = ({ products}) => {
-    return (
-        <section className='py-2 bg-light'>
-            <div className="container px-4 px-lg-5 mt-3">
-                <h2 className='fw-bolder mb-4'>Related Products</h2>
-                <div className="row gx-4 gx-lg-5 row-cols-md-3 row-cols-xl-4 justify-contend-center">
-                    {products.map(product => <HomeCard key={product.id} product={product} />)}
-                </div>
-            </div>
-        </section>
-    )
-}
-
-export default RelatedProducts
+export default RelatedProducts;

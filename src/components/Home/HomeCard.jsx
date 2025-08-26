@@ -1,28 +1,19 @@
-import { BASE_URL } from "../../api";
-import styles from "./HomeCard.module.css"
+import styles from "./HomeCard.module.css";
 import { Link } from "react-router-dom";
 
+const HomeCard = ({ product }) => (
+    <div className={styles.card}>
+        <Link to={`/products/${product.slug}`} className={styles.link}>
+            <div className={styles.imgWrap}>
+                <img src={product.image} alt={product.name} className={styles.img} />
+            </div>
+            <div className={styles.body}>
+                <h3 className={styles.title}>{product.name}</h3>
+                <div className={styles.price}>${product.price}</div>
+            </div>
+        </Link>
+    </div>
+);
 
-const HomeCard = ({product}) => {
-    console.log(BASE_URL)
-    return (
-        <div className={`col-md-3 ${styles.col}`}>
-            <Link to={`/products/${product.slug}`} className={styles.link}>
-                <div className={styles.card}>
+export default HomeCard;
 
-                    <div className={styles.cardImgWrapper}>
-                        <img src={`${product.image}`} className={styles.cardImgTop} alt="Product Image" />
-                        
-                    </div>
-                    <div className={styles.cardBody}>
-                        <h5 className={`${styles.cardTitle} mb-1`}>{product.name}</h5>
-                        <h6 className={styles.cardText}>{`$${product.price}`}</h6>
-
-                    </div>
-                </div>
-            </Link>
-        </div>
-    )
-}
-
-export default HomeCard
