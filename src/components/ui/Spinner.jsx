@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClipLoader } from 'react-spinners';
+import { RingLoader } from 'react-spinners';
 
 const override = {
     display: 'block',
@@ -8,15 +8,31 @@ const override = {
 };
 
 const Spinner = ({ loading }) => {
-    return (
-        <ClipLoader
-            loading={loading}
-            cssOverride={override}
-            size={150}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-        />
-    );
+    if (!loading) return null
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0, left: 0,
+      width: '100vw',
+      height: '100vh',
+      background: 'rgba(255, 255, 255, 0.24)',
+      backdropFilter: 'blur(3px)',
+      WebkitBackdropFilter: 'blur(3px)',
+      zIndex: 9999,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <RingLoader
+        color="#ffb01cff"  
+        loading={true}
+        size={36}
+        speedMultiplier={1.2}
+        aria-label="Loading"
+        data-testid="loader"
+      />
+    </div>
+  )
 };
 
 export default Spinner;
