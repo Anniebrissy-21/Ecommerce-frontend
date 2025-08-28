@@ -22,9 +22,9 @@ const App = () => {
 
   useEffect(() => {
     if (cart_code) {
-      api.get(`/cart_status?cart_code=${cart_code}/`)
+      api.get(`/cart_status?cart_code=${cart_code}`)
         .then(res => {
-          console.log(res.data)
+          console.log(res.data.num_of_items)
           setNumCartItems(res.data.num_of_items)
         })
         .catch(err => {
@@ -45,7 +45,7 @@ const App = () => {
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegistrationPage />} />
             <Route path="profile" element={<UserProfilePage />} />
-            <Route path="products" element={<ProductsPageWithCategory />} />
+            <Route path="products" element={<ProductsPageWithCategory setNumCartItems={setNumCartItems} />} />
             <Route path="*" element={<NotFountPage />} />
             <Route path="payment-status" element={<PaymentsStatusPage setNumCartItems={setNumCartItems} />} />
           </Route>
