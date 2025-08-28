@@ -1,0 +1,131 @@
+.auth-bg {
+  min-height: 100vh;
+  width: 100vw;
+  background: #faf7f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.register-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 32px rgba(100,78,30,.07);
+  padding: 40px 38px 31px 38px;
+  width: 100%;
+  min-width: 415px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn .7s;
+  max-width: 700px;
+}
+.register-header-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(140deg, #f8f1e6 68%, #e5c478 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 14px;
+}
+.register-title {
+  color: #91713e;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3px;
+  letter-spacing: 1px;
+}
+.register-subtitle {
+  color: #ccb88e;
+  font-size: 15px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.register-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 9px;
+}
+.input-row {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 6px;
+}
+.input-col {
+  flex: 1 1 49%;
+  display: flex;
+  flex-direction: column;
+}
+.register-form label {
+  font-weight: 500;
+  color: #513c13;
+  margin-bottom: 4px;
+  font-size: 15px;
+}
+.register-form input {
+  border-radius: 9px;
+  border: 1.4px solid #efebdf;
+  background: #faf6ee;
+  padding: 11px 12px;
+  font-size: 16.2px;
+  transition: border .2s, box-shadow 0.2s;
+  margin-bottom: 8px;
+}
+.register-form input:focus {
+  border-color: #d7b86a;
+  box-shadow: 0 0 0 2px #fcedc3bb;
+  outline: none;
+}
+.primary-btn {
+  width: 100%;
+  background: linear-gradient(90deg,#f1d397,#e2be76 80%);
+  color: #7f630a;
+  border: none;
+  border-radius: 8px;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 16px;
+  padding: 11px 0;
+  box-shadow: 0 2px 8px #e0c79333;
+  transition: background .18s, transform .1s;
+}
+.primary-btn:disabled,
+.primary-btn:hover,
+.primary-btn:focus {
+  background: linear-gradient(85deg,#f8e9be,#dec182 90%);
+  color: #6d5102;
+}
+.primary-btn:active {
+  filter: brightness(0.97);
+  transform: scale(0.98);
+}
+.register-footer {
+  margin-top: 19px;
+  text-align: center;
+}
+.register-footer p {
+  color: #ab955e;
+  font-size: 14.7px;
+}
+.register-footer a {
+  color: #ad881c;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 2px;
+}
+.register-footer a:hover {
+  text-decoration: underline;
+  color: #856b0d;
+}
+@media (max-width: 520px) {
+  .register-card { padding: 16px 5vw; }
+  .input-row { flex-direction: column; gap: 4px; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
