@@ -42,7 +42,6 @@ const WishListPage = ({ setWishListCount }) => {
   };
 
   const add_to_cart = (productId, quantity) => {
-    debugger
     const cartId = localStorage.getItem('cart_id');
     const objToSnd = {
       cart: cartId,

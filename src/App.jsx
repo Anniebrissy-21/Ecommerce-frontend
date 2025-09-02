@@ -72,7 +72,7 @@ const App = () => {
             <Route path="products" element={<ProductsPageWithCategory setNumCartItems={setNumCartItems} setWishListCount={setWishListCount} />} />
             <Route path="*" element={<NotFountPage />} />
             <Route path="payment-status" element={<PaymentsStatusPage setNumCartItems={setNumCartItems} />} />
-            <Route path="wishlist" element={<WishListPage />} />
+            <Route path="wishlist" element={<WishListPage setWishListCount={setWishListCount} />} />
           </Route>
         </Routes>
       </BrowserRouter>
