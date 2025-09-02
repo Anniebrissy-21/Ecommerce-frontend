@@ -1,0 +1,153 @@
+.wishlist-root {
+  background: #f3e7ce;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.wishlist-title {
+  color: #837237; /* app brand color */
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.wishlist-table-container {
+  background: #fff7e4; /* app light background */
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px #cab68822;
+  overflow-x: auto;
+}
+
+.wishlist-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 14px;
+  min-width: 720px;
+}
+
+.wishlist-table th,
+.wishlist-table td {
+  text-align: left;
+  padding: 12px 14px;
+  background: #fff;
+  vertical-align: middle;
+}
+
+.wishlist-table th {
+  color: #837237; /* header color */
+  font-weight: 600;
+  background: transparent;
+  border-bottom: 2px solid #f3e7ce;
+}
+
+.wishlist-product {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wishlist-product img {
+  border-radius: 8px;
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+  background: #faf2e0;
+}
+
+.wishlist-prodname {
+  font-weight: bold;
+  color: #39391d;
+  font-size: 1.05rem;
+}
+
+.wishlist-sku {
+  color: #8d8e53;
+  font-size: 0.8rem;
+}
+
+.wishlist-qty {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.wishlist-qty button {
+  width: 28px;
+  height: 28px;
+  background: #f3e7ce;
+  border: none;
+  border-radius: 6px;
+  color: #837237;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.18s;
+}
+.wishlist-qty button:hover {
+  background: #fff7e4;
+}
+
+.wishlist-oldprice {
+  color: #cab688;
+  text-decoration: line-through;
+  margin-right: 8px;
+}
+
+.wishlist-price {
+  color: #b89e5a;
+  font-weight: bold;
+}
+
+.wishlist-stock.in-stock {
+  color: #6ba456;
+  font-weight: 600;
+}
+
+.wishlist-stock.out-stock {
+  color: #d36b6b;
+  font-weight: 600;
+}
+
+.wishlist-addcart {
+  background: #b89e5a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.3rem;
+  font-weight: 500;
+  font-size: 0.97rem;
+  cursor: pointer;
+  box-shadow: 0 1px 6px #cab68830;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.wishlist-addcart:hover {
+  background: #837237;
+  box-shadow: 0 3px 12px #cab68859;
+}
+
+.wishlist-link {
+  color: #837237;
+  text-decoration: underline;
+  font-size: 1.04rem;
+}
+
+.wishlist-below-link {
+  padding-top: 2rem;
+  text-align: left;
+}
+
+.wishlist-empty-table {
+  text-align: center;
+  color: #8d8e53;
+  padding: 2rem 0;
+}
+
+.wishlist-empty-heart {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.wishlist-empty-text {
+  font-size: 1.15rem;
+}

@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { FaCartShopping } from "react-icons/fa6";
+import { FaCartShopping, FaHeart } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import NavBarLink from "./NavBarLink";
 import { AuthContext } from "../../context/AuthContext";
 
-const NavBar = ({ numCartItems }) => {
+const NavBar = ({ numCartItems, wishListCount }) => {
   const { isAuthenticated, username, setIsAuthenticated } = useContext(AuthContext);
   const itemCount = Number(numCartItems) || 0;
 
@@ -71,6 +71,26 @@ const NavBar = ({ numCartItems }) => {
                 </button>
               </>
             )}
+
+            <Link to="/wishlist"
+              className={`btn position-relative ${styles.responsiveCart}`}
+              style={{ background: "#fff", borderRadius: "50%", padding: 11, border: "1px solid #ececec" }}
+              aria-label={`wishlist with ${wishListCount} items`}>
+            <FaHeart size={20} />
+            {wishListCount > 0 && (
+                <span
+                  className="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                  style={{
+                    fontSize: "0.82rem",
+                    padding: "0.4em 0.7em",
+                    backgroundColor: "#cab49c",
+                    color: "#fff",
+                  }}
+                >
+                  {wishListCount ?? 0}
+                </span>
+              )}
+            </Link> 
 
             {/* Cart icon */}
             <Link

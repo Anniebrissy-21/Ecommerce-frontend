@@ -12,11 +12,11 @@ const HomePage = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
 
-  useEffect(function(){
-    if (localStorage.getItem('cart_code') === null) {
-      localStorage.setItem('cart_code', randomValue)
-    }
-  }, [])
+  // useEffect(function(){
+  //   if (localStorage.getItem('cart_code') === null) {
+  //     localStorage.setItem('cart_code', randomValue)
+  //   }
+  // }, [])
 
   useEffect(function () {
     setLoading(true)

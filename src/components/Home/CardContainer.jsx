@@ -10,7 +10,7 @@ const CardContainer = ({ products }) => (
                 Our Products
             </h2>
             <div style={{
-                display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(236px, 1fr))",
+                display: "grid", gridTemplateColumns: "repeat(4, minmax(236px, 1fr))",
                 gap: "1.8rem"
             }}>
                 {products.map(product => (

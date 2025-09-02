@@ -18,19 +18,27 @@
 
 .imgWrap {
     width: 100%;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1/1; /* Maintains square shape */
     overflow: hidden;
     border-radius: 14px 14px 0 0;
+    position: relative; /* Improves control over image positioning */
 }
 
 .img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover; /* Crops image to fill the container without distortion */
+    object-position: center; /* Keeps image centered */
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.img:hover {
+    transform: scale(1.05); /* Optional: slight zoom on hover */
 }
 
 .body {
-    padding: 1.1rem .8rem;
+    padding: 1.1rem 0.8rem;
     text-align: center;
 }
 
@@ -40,13 +48,19 @@
     margin-bottom: 6px;
     font-weight: 600;
     line-height: 1.15;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .price {
     font-size: 1rem;
     color: #b48940;
     background: #f6ebd6;
-    padding: .26rem 1.1rem;
+    padding: 0.26rem 1.1rem;
     border-radius: 16px;
     font-weight: 700;
+    display: inline-block;
 }
