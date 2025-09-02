@@ -1,24 +1,3 @@
-/* .paypalButton, .flutterwaveButton {
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.flutterwaveButton {
-    background-color: #f89500 !important;
-    border: none !important;
-    color: white !important;
-}
-
-.paypalButton:hover, .flutterwaveButton:hover {
-    opacity: 0.9;
-}
-
-.card {
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-} */
-
-
 .card {
   border-radius: 12px;
   box-shadow: 0 4px 18px rgba(191, 160, 107, 0.10);

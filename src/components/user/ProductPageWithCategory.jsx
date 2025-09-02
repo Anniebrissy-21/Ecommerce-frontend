@@ -12,7 +12,7 @@ const categories = [
   "Clothings",
 ];
 
-const ProductsPageWithCategory = ({ setNumCartItems }) => {
+const ProductsPageWithCategory = ({ setNumCartItems, setWishListCount }) => {
   const [activeCategory, setActiveCategory] = useState("");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ const ProductsPageWithCategory = ({ setNumCartItems }) => {
       .then(res => {
         const map = {};
         res.data.forEach(item => {
-          map[item.product] = { id: item.id, is_added: item.is_added };
+          map[item.product.id] = { id: item.id, is_added: item.is_added };
         });
         setWishlistMap(map);
       })
@@ -57,7 +57,7 @@ const ProductsPageWithCategory = ({ setNumCartItems }) => {
 
     api.post("/add_item/", newItem)
       .then(res => {
-        
+
         toast.success("Item added to cart");
         api.get(`/cart_status?cart_code=${cart_code}`)
           .then(res => {
@@ -78,8 +78,8 @@ const ProductsPageWithCategory = ({ setNumCartItems }) => {
     const wishlistEntry = wishlistMap[product_id];
 
     if (wishlistEntry && wishlistEntry.is_added) {
-       setLoading(true)
-      api.put(`/wishlist/${wishlistEntry.id}/`, { product: product_id, is_added: false })
+      setLoading(true)
+      api.put(`/wishlist/${wishlistEntry.id}/`, { product_id: product_id, is_added: false })
         .then(() => {
           toast.info("Product removed from wishlist");
           setWishlistMap(prev => ({
@@ -87,11 +87,12 @@ const ProductsPageWithCategory = ({ setNumCartItems }) => {
             [product_id]: { ...wishlistEntry, is_added: false }
           }));
           setLoading(false)
+          setWishListCount(curr => curr - 1)
         })
         .catch(() => toast.error("Could not remove product from wishlist"));
     } else if (wishlistEntry) {
       setLoading(true)
-      api.put(`/wishlist/${wishlistEntry.id}/`, { product: product_id, is_added: true })
+      api.put(`/wishlist/${wishlistEntry.id}/`, { product_id: product_id, is_added: true })
         .then(() => {
           toast.success("Product added to wishlist");
           setWishlistMap(prev => ({
@@ -99,11 +100,12 @@ const ProductsPageWithCategory = ({ setNumCartItems }) => {
             [product_id]: { ...wishlistEntry, is_added: true }
           }));
           setLoading(false)
+          setWishListCount(curr => curr + 1)
         })
         .catch(() => toast.error("Could not add product to wishlist"));
     } else {
       setLoading(true)
-      api.post("/wishlist/", { product: product_id, is_added: true })
+      api.post("/wishlist/", { product_id: product_id, is_added: true })
         .then(res => {
           toast.success("Product added to wishlist");
           setWishlistMap(prev => ({
@@ -111,6 +113,7 @@ const ProductsPageWithCategory = ({ setNumCartItems }) => {
             [product_id]: { id: res.data.id, is_added: true }
           }));
           setLoading(false)
+          setWishListCount(curr => curr + 1)
         })
         .catch(() => toast.error("Could not add product to wishlist"));
     }
@@ -141,6 +144,7 @@ const ProductsPageWithCategory = ({ setNumCartItems }) => {
             <div style={{ color: "#bfa76a", fontSize: 22, marginTop: 80 }}>No products found.</div>
           }
           {products.map(product => (
+            
             <div key={product.id} className={styles.productCard}>
               <span className={styles.priceBadge}>₹{product.price}</span>
               <button onClick={e => toggle_wishlist(e, product.id)} className={styles.wishlistIcon} aria-label="Toggle wishlist" style={{ border: "none", backgroundColor: "inherit" }}>

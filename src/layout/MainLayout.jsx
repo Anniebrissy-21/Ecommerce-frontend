@@ -5,11 +5,11 @@ import { Outlet } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const MainLayout = ({numCartItems}) => {
+const MainLayout = ({numCartItems, wishListCount}) => {
   return (
     <>
     
-    <NavBar numCartItems={numCartItems}/>
+    <NavBar numCartItems={numCartItems} wishListCount={wishListCount} />
     <ToastContainer />
     <Outlet />
     <Footer />
