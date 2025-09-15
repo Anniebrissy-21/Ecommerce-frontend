@@ -7,7 +7,7 @@ const NavBarLink = () => {
             <li className='nav-item'>
                 <NavLink
                     to="/"
-                    className={({ isActive }) => isActive ? 'nav-link active fw-semibold' : 'nav-link fw-semibold'}
+                    className={({ isActive }) => isActive ? 'nav-link active fw-semibold' : 'nav-link fw-semibold'} style={{ color: 'white' }}
                     end
                 >
                     Home
@@ -16,7 +16,7 @@ const NavBarLink = () => {
 
             <li className='nav-item'>
                 <NavLink
-                    to="/products"
+                    to="/products" style={{ color: 'white' }}
                     className={({ isActive }) => isActive ? 'nav-link active fw-semibold' : 'nav-link fw-semibold'}
                 >
                     Products

@@ -1,11 +1,11 @@
 .wishlist-root {
-  background: #f3e7ce;
+  background: #f9d1f9ad;;
   min-height: 100vh;
   padding: 2rem;
 }
 
 .wishlist-title {
-  color: #837237; /* app brand color */
+  color: purple; /* app brand color */
   margin-bottom: 1.5rem;
   font-weight: 600;
 }

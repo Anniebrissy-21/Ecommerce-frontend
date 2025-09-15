@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import { FaCartShopping, FaHeart } from "react-icons/fa6";
+import { FaSignInAlt, FaSignOutAlt, FaUserPlus , FaBox} from 'react-icons/fa';
 import { Link, NavLink } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import NavBarLink from "./NavBarLink";
 import { AuthContext } from "../../context/AuthContext";
+import { Tooltip } from 'react-tooltip'
+import CreateProduct from "../product/CreateProduct";
 
 const NavBar = ({ numCartItems, wishListCount }) => {
   const { isAuthenticated, username, setIsAuthenticated } = useContext(AuthContext);
@@ -16,10 +19,10 @@ const NavBar = ({ numCartItems, wishListCount }) => {
   }
 
   return (
-    <nav className={`navbar navbar-expand-lg navbar-light bg-light shadow-sm py-3 ${styles.stickyNavbar}`}>
-      <div className="container">
+    <nav className={`navbar navbar-expand-lg shadow-sm py-3 ${styles.stickyNavbar}`} style={{ background: 'rgb(55 0 55 / 87%)' }}>
+      <div className="container-fluid">
         {/* Brand */}
-        <Link className="navbar-brand fw-bold" to="/" style={{ letterSpacing: "1px", fontSize: "1.55rem" }}>
+        <Link className="navbar-brand fw-bold ms-3" to="/" style={{ letterSpacing: "1px", fontSize: "1.55rem", color: 'white' }}>
           ShopIt
         </Link>
 
@@ -43,78 +46,91 @@ const NavBar = ({ numCartItems, wishListCount }) => {
             <NavBarLink />
           </ul>
 
+
+          <Link to="/wishlist"
+            className={`btn position-relative me-3 ${styles.responsiveCart}`} data-tooltip-id="login-tooltip"
+            data-tooltip-content="WishList"
+            style={{}}
+            aria-label={`wishlist with ${wishListCount} items`}>
+            <FaHeart size={24} color="#c7aec7" />
+            {wishListCount > 0 && (
+              <span
+                className="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                style={{
+                  fontSize: "0.82rem",
+                  padding: "0.4em 0.7em",
+                  backgroundColor: "rgb(100 61 109)",
+                  color: "#fff",
+                }}
+              >
+                {wishListCount ?? 0}
+              </span>
+            )}
+          </Link>
+
+          {/* Cart icon */}
+          <Link
+            to="/cart"
+            className={`btn position-relative ${styles.responsiveCart}`} data-tooltip-id="login-tooltip"
+            data-tooltip-content="Cart"
+            aria-label={`Cart with ${itemCount} items`}
+          >
+            <FaCartShopping size={24} color="#c7aec7" />
+            {itemCount > 0 && (
+              <span
+                className="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                style={{
+                  fontSize: "0.82rem",
+                  padding: "0.4em 0.7em",
+                  backgroundColor: "rgb(100 61 109)",
+                  color: "#fff",
+                }}
+              >
+                {itemCount}
+              </span>
+            )}
+          </Link>
+
           {/* Auth & Cart area */}
-          <div className="d-flex align-items-center ms-auto gap-2">
+          <div className="d-flex align-items-center ms-3 gap-2 me-3">
             {!isAuthenticated ? (
               <>
-                <NavLink to="/login" className="btn btn-link text-decoration-none px-2">
-                  Login
+                <NavLink to="/login" className="btn text-decoration-none px-2" data-tooltip-id="login-tooltip"
+                  data-tooltip-content="Login">
+                  <FaSignInAlt size={24} color="white" />
                 </NavLink>
-                <NavLink to="/register" className="btn btn-link text-decoration-none px-2">
-                  Register
+                <NavLink to="/register" className="btn text-decoration-none px-2" data-tooltip-id="login-tooltip"
+                  data-tooltip-content="Register">
+                  <FaUserPlus size={24} color="white" />
                 </NavLink>
+                <Tooltip id="login-tooltip" place="bottom" />
               </>
             ) : (
               <>
                 <NavLink to="/profile" className={({ isActive }) =>
-                  isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"}
+                  isActive ? "nav-link active fw-semibold" : "nav-link fw-semibold"} style={{ color: 'white' }}
                   end
                 >
                   Hi, {username}
                 </NavLink>
+
+                <NavLink className="btn text-decoration-none px-2" data-tooltip-id="login-tooltip" style={{ border: 'none' }} to="/product"
+                  data-tooltip-content="Create product">
+                  <FaBox size={24} color="white" />
+                </NavLink>
+
                 <button
                   onClick={onLogout}
-                  className="btn btn-light border px-3 me-2"
-                  style={{ borderRadius: 20, fontWeight: 500 }}
+                  className="btn text-decoration-none px-2" data-tooltip-id="login-tooltip"
+                  data-tooltip-content="LogOut"
                 >
-                  Logout
+                   <FaSignOutAlt size={24} color="white" />
                 </button>
               </>
             )}
-
-            <Link to="/wishlist"
-              className={`btn position-relative ${styles.responsiveCart}`}
-              style={{ background: "#fff", borderRadius: "50%", padding: 11, border: "1px solid #ececec" }}
-              aria-label={`wishlist with ${wishListCount} items`}>
-            <FaHeart size={20} />
-            {wishListCount > 0 && (
-                <span
-                  className="position-absolute top-0 start-100 translate-middle badge rounded-pill"
-                  style={{
-                    fontSize: "0.82rem",
-                    padding: "0.4em 0.7em",
-                    backgroundColor: "#cab49c",
-                    color: "#fff",
-                  }}
-                >
-                  {wishListCount ?? 0}
-                </span>
-              )}
-            </Link> 
-
-            {/* Cart icon */}
-            <Link
-              to="/cart"
-              className={`btn position-relative ${styles.responsiveCart}`}
-              style={{ background: "#fff", borderRadius: "50%", padding: 11, border: "1px solid #ececec" }}
-              aria-label={`Cart with ${itemCount} items`}
-            >
-              <FaCartShopping size={20} />
-              {itemCount > 0 && (
-                <span
-                  className="position-absolute top-0 start-100 translate-middle badge rounded-pill"
-                  style={{
-                    fontSize: "0.82rem",
-                    padding: "0.4em 0.7em",
-                    backgroundColor: "#cab49c",
-                    color: "#fff",
-                  }}
-                >
-                  {itemCount}
-                </span>
-              )}
-            </Link>
           </div>
+
+          <Tooltip  id="login-tooltip" />
         </div>
       </div>
     </nav>

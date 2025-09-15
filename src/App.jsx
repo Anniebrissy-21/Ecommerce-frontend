@@ -17,6 +17,7 @@ import ProductsPageWithCategory from "./components/user/ProductPageWithCategory"
 import WishListPage from "./components/wishlist/WishListPage"
 import { randomValue } from "./GenerateCartCode"
 import { toast } from "react-toastify"
+import CreateProduct from "./components/product/CreateProduct"
 
 const App = () => {
   const [numCartItems, setNumCartItems] = useState(0)
@@ -73,6 +74,7 @@ const App = () => {
             <Route path="*" element={<NotFountPage />} />
             <Route path="payment-status" element={<PaymentsStatusPage setNumCartItems={setNumCartItems} />} />
             <Route path="wishlist" element={<WishListPage setWishListCount={setWishListCount} />} />
+            <Route path="/product" element={<CreateProduct />} />
           </Route>
         </Routes>
       </BrowserRouter>
