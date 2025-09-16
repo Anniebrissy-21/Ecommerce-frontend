@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import api from '../../api';
 import { toast } from 'react-toastify';
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const categories = [
     { value: '', label: 'Select Category' },
     { value: 'Electronics', label: 'Electronics' },
     { value: 'Gloceries', label: 'Gloceries' },
-    { value: 'Clothing', label: 'Clothing' },
+    { value: 'Clothings', label: 'Clothings' },
 ];
 
 const CreateProductForm = () => {
@@ -19,6 +21,7 @@ const CreateProductForm = () => {
     });
     const [errors, setErrors] = useState({});
     const [preview, setPreview] = useState(null);
+    const navigate = useNavigate();
 
     const validate = () => {
         const newErrors = {};
@@ -35,14 +38,16 @@ const CreateProductForm = () => {
     };
 
     const handleFileChange = (e) => {
-        const file = e.target.files;
+        const file = e.target.files[0]; // Only get the first file!
         setValues((prev) => ({ ...prev, image: file }));
         setPreview(URL.createObjectURL(file));
     };
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const formErrors = validate();
+
         if (Object.keys(formErrors).length === 0) {
             const formData = new FormData();
             formData.append('name', values.name);
@@ -50,17 +55,20 @@ const CreateProductForm = () => {
             formData.append('price', values.price);
             formData.append('category', values.category);
             formData.append('image', values.image);
-            
+
             api.post('/products/', formData)
-            .then(res => {
-                
-            }).catch(err => {
-                toast.error(err.message)
-            })
+                .then(response => {
+                    console.log('Product created:', response.data);
+                    navigate('/products')
+                })
+                .catch(error => {
+                    toast.error(error.message)
+                });
         } else {
             setErrors(formErrors);
         }
     };
+
 
     return (
         <form className="product-form" onSubmit={handleSubmit} style={formStyle}>
